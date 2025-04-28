@@ -1,0 +1,16 @@
+flutter_native_splash:
+  color: "#5203d5"
+  image: assets/logo/new/logo-purple.png
+  branding: assets/logo/new/logo-nohunger-purple.png
+  color_dark: "#181818"
+  image_dark: assets/logo/new/logo-black.png
+  # branding: assets/logo/new/logo.png
+
+  android_12:
+    image: assets/logo/new/logo-purple.png
+    icon_background_color: "#5203d5"
+    image_dark: assets/logo/new/logo-black.png
+    icon_background_color_dark: "#181818"
+
+  web: false
+  
