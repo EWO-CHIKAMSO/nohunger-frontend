@@ -2,10 +2,10 @@ import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:nohunger/route/screen_export.dart';
-import 'package:nohunger/utilities/clipper.dart';
 import 'package:nohunger/utilities/constants.dart';
 import 'package:nohunger/utilities/size_config.dart';
 import 'utilities/custom_appbar.dart';
+import 'package:nohunger/screen/vendor/widget/login.dart';
 
 class EntryPoint extends StatefulWidget {
   const EntryPoint({super.key});
@@ -106,13 +106,15 @@ class _EntryPointState extends State<EntryPoint> {
         child: _pages[_currentIndex],
       ),
       bottomNavigationBar: BottomAppBar(
+        height: 60,
         shape: const CircularNotchedRectangle(),
-        notchMargin: 8,
+       
         color: Theme.of(context).brightness == Brightness.light
             ? Colors.white
             : const Color(0xFF101015),
         child: SizedBox(
-          height: 65,
+        
+           height: 10,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
@@ -141,7 +143,7 @@ class _EntryPointState extends State<EntryPoint> {
         children: [
           SvgPicture.asset(
             iconPath,
-            height: 18,
+            height: 16,
             color: _currentIndex == index ? Colors.black : Colors.grey,
           ),
           const SizedBox(height: 4),
@@ -163,12 +165,12 @@ class _EntryPointState extends State<EntryPoint> {
         // Navigate to another screen (e.g. BookmarkScreen)
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => const BookmarkScreen()),
+          MaterialPageRoute(builder: (context) => UserLogin(onGoToSecondPage: () {  },)),
         );
       },
       child: Container(
-        height: 35,
-        width: 45,
+        height: 30,
+        width: 40,
         decoration: BoxDecoration(
           color: Colors.black,
           shape: BoxShape.rectangle,
