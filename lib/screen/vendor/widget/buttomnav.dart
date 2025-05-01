@@ -24,8 +24,8 @@ class _BottomNavState extends State<BottomNav> {
     super.initState();
     _pages = [
       EcommerceDashboard(onGoToSecondPage: widget.onGoToSecondPage),
+       const Wallet(),
       const OrdersPage(),
-      const Wallet(),
       const ProfilePage(),
     ];
   }

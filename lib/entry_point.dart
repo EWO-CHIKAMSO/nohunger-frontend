@@ -106,7 +106,7 @@ class _EntryPointState extends State<EntryPoint> {
         child: _pages[_currentIndex],
       ),
       bottomNavigationBar: BottomAppBar(
-        height: 60,
+        height: 66,
         shape: const CircularNotchedRectangle(),
        
         color: Theme.of(context).brightness == Brightness.light
@@ -114,15 +114,15 @@ class _EntryPointState extends State<EntryPoint> {
             : const Color(0xFF101015),
         child: SizedBox(
         
-           height: 10,
+           height: 60,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              _buildNavItem(0, "assets/icons/user/house-solid.svg", "Home"),
-              _buildNavItem(1, "assets/icons/user/wallet-solid.svg", "Wallet"),
+              _buildNavItem(0, Icons.grid_view, "Home"),
+              _buildNavItem(1,Icons.account_balance_wallet_outlined, "Wallet"),
               _buildBookmarkButton(), // Center button
-              _buildNavItem(2, "assets/icons/user/cart-plus-solid.svg", "Cart"),
-              _buildNavItem(3, "assets/icons/user/user-solid.svg", "Profile"),
+              _buildNavItem(2,Icons.shopping_basket_outlined, "Cart"),
+              _buildNavItem(3,Icons.person_outline, "Profile"),
             ],
           ),
         ),
@@ -130,7 +130,7 @@ class _EntryPointState extends State<EntryPoint> {
     );
   }
 
-  Widget _buildNavItem(int index, String iconPath, String label) {
+  Widget _buildNavItem(int index, IconData iconPath, String label) {
     return GestureDetector(
       onTap: () {
         setState(() {
@@ -141,12 +141,8 @@ class _EntryPointState extends State<EntryPoint> {
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          SvgPicture.asset(
-            iconPath,
-            height: 16,
-            color: _currentIndex == index ? Colors.black : Colors.grey,
-          ),
-          const SizedBox(height: 4),
+         Icon(iconPath, color: _currentIndex == index ? Colors.black : Colors.grey, size: 24),
+          const SizedBox(height:2),
           Text(
             label,
             style: TextStyle(

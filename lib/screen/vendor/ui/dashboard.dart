@@ -20,8 +20,9 @@ class _EcommerceDashboardState extends State<EcommerceDashboard> {
   int _currentIndex = 0;
   final List _pages = const [
     _DashboardContent(),
-      const OrdersPage(),
       const Wallet(),
+      const OrdersPage(),
+      // const Wallet(),
       const ProfilePage(),
   ];
 
@@ -29,6 +30,7 @@ class _EcommerceDashboardState extends State<EcommerceDashboard> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -53,10 +55,7 @@ class _EcommerceDashboardState extends State<EcommerceDashboard> {
                 ),
               ],
             ),
-            GestureDetector(
-              onTap: widget.onGoToSecondPage,
-              child: const Icon(Icons.exit_to_app, color: Colors.black, size: 30),
-            ),
+           
           ],
         ),
         actions: [
@@ -79,9 +78,10 @@ class _EcommerceDashboardState extends State<EcommerceDashboard> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               _buildNavItem(0, Icons.grid_view, "Home"),
-              _buildNavItem(1, Icons.shopping_basket_outlined, "Wallet"),
+              _buildNavItem(1, Icons.account_balance_wallet_outlined, "Wallet"),
+              
               _buildBookmarkButton(),
-              _buildNavItem(2, Icons.account_balance_wallet_outlined, "Cart"),
+              _buildNavItem(2,Icons.shopping_basket_outlined, "Cart"),
               _buildNavItem(3,Icons.person_outline, "Profile"),
             ],
           ),
