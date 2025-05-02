@@ -38,6 +38,34 @@ class _WalletState extends State<Wallet> {
     }
   ];
 
+  // Transaction data
+  final List<Map<String, dynamic>> _transactions = [
+    {
+      'type': 'Deposit',
+      'date': 'April 28, 2025',
+      'amount': 120.00,
+      'isPositive': true,
+      'icon': Icons.arrow_downward,
+      'iconColor': Colors.blue,
+    },
+    {
+      'type': 'Withdrawal',
+      'date': 'April 25, 2025',
+      'amount': 75.00,
+      'isPositive': false,
+      'icon': Icons.arrow_upward,
+      'iconColor': Colors.red,
+    },
+    {
+      'type': 'Sales Revenue',
+      'date': 'April 22, 2025',
+      'amount': 205.00,
+      'isPositive': true,
+      'icon': Icons.shopping_cart,
+      'iconColor': Colors.green,
+    },
+  ];
+
   void _handleWithdraw() {
     if (_withdrawAmount.isEmpty) return;
     
@@ -86,141 +114,135 @@ class _WalletState extends State<Wallet> {
           children: [
             Padding(
               padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(children: [
-                    const Text("Wallet", style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
-                    const Spacer(),
-                    GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          isDropdownOpen = !isDropdownOpen;
-                        });
-                      },
-                      child: Row(
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(children: [
+                      const Text("Wallet", style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+                      const Spacer(),
+                      _buildPeriodDropdown()
+                    ],),
+                    Container(
+                      padding: const EdgeInsets.all(16),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12),
+                        gradient: const LinearGradient(
+                          colors: [Colors.purple, Colors.pink],
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                        ),
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(selectedTimeframe, style: const TextStyle(fontSize: 16)),
-                          const Icon(Icons.arrow_drop_down),
+                          const Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text("Sales in April", style: TextStyle(color: Colors.white, fontSize: 16)),
+                              Icon(Icons.cloud, color: Colors.white),
+                            ],
+                          ),
+                          const SizedBox(height: 8),
+                          const Text("\$0.00", style: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold)),
+                          Align(
+                            alignment: Alignment.topRight,
+                            child: Container(
+                              padding: const EdgeInsets.all(6),
+                              decoration: BoxDecoration(
+                                color: Colors.white.withOpacity(0.2),
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: const Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Icon(Icons.trending_up, color: Colors.white, size: 16),
+                                  SizedBox(width: 4),
+                                  Text("+2.5%", style: TextStyle(color: Colors.white, fontSize: 14)),
+                                ],
+                              ),
+                            ),
+                          ),
                         ],
                       ),
                     ),
-                  ],),
-                  Container(
-                    padding: const EdgeInsets.all(16),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(12),
-                      gradient: const LinearGradient(
-                        colors: [Colors.purple, Colors.pink],
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                      ),
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                    const SizedBox(height: 16),
+                    Row(
                       children: [
-                        const Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text("Sales in April", style: TextStyle(color: Colors.white, fontSize: 16)),
-                            Icon(Icons.cloud, color: Colors.white),
-                          ],
-                        ),
-                        const SizedBox(height: 8),
-                        const Text("\$0.00", style: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold)),
-                        Align(
-                          alignment: Alignment.topRight,
+                        Expanded(
                           child: Container(
-                            padding: const EdgeInsets.all(6),
+                            padding: const EdgeInsets.all(12),
                             decoration: BoxDecoration(
-                              color: Colors.white.withOpacity(0.2),
+                              color: Colors.white,
                               borderRadius: BorderRadius.circular(12),
+                              border: Border.all(color: Colors.grey.shade300),
                             ),
-                            child: const Row(
-                              mainAxisSize: MainAxisSize.min,
+                            child: const Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Icon(Icons.trending_up, color: Colors.white, size: 16),
-                                SizedBox(width: 4),
-                                Text("+2.5%", style: TextStyle(color: Colors.white, fontSize: 14)),
+                                Text("Commission"),
+                                SizedBox(height: 8),
+                                Text("-\$0.00", style: TextStyle(fontWeight: FontWeight.bold)),
+                              ],
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 8),
+                        Expanded(
+                          child: Container(
+                            padding: const EdgeInsets.all(12),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(12),
+                              border: Border.all(color: Colors.grey.shade300),
+                            ),
+                            child: const Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text("Profit"),
+                                SizedBox(height: 8),
+                                Text("\$0.00", style: TextStyle(fontWeight: FontWeight.bold)),
                               ],
                             ),
                           ),
                         ),
                       ],
                     ),
-                  ),
-                  const SizedBox(height: 16),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Container(
-                          padding: const EdgeInsets.all(12),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(12),
-                            border: Border.all(color: Colors.grey.shade300),
-                          ),
-                          child: const Column(
+                    const SizedBox(height: 16),
+                    Container(
+                      padding: const EdgeInsets.all(16),
+                      decoration: BoxDecoration(
+                        color: Colors.black,
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text("Commission"),
-                              SizedBox(height: 8),
-                              Text("-\$0.00", style: TextStyle(fontWeight: FontWeight.bold)),
+                              Text("\$0.00", style: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold)),
+                              SizedBox(height: 4),
+                              Text("Withdrawable Amount", style: TextStyle(color: Colors.white70, fontSize: 14)),
                             ],
                           ),
-                        ),
+                          ElevatedButton(
+                            onPressed: () => _showWithdrawBottomSheet(context),
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.pink,
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                            ),
+                            child: const Text("Withdraw", style: TextStyle(color: Colors.white)),
+                          ),
+                        ],
                       ),
-                      const SizedBox(width: 8),
-                      Expanded(
-                        child: Container(
-                          padding: const EdgeInsets.all(12),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(12),
-                            border: Border.all(color: Colors.grey.shade300),
-                          ),
-                          child: const Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text("Profit"),
-                              SizedBox(height: 8),
-                              Text("\$0.00", style: TextStyle(fontWeight: FontWeight.bold)),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 16),
-                  Container(
-                    padding: const EdgeInsets.all(16),
-                    decoration: BoxDecoration(
-                      color: Colors.black,
-                      borderRadius: BorderRadius.circular(12),
                     ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text("\$0.00", style: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold)),
-                            SizedBox(height: 4),
-                            Text("Withdrawable Amount", style: TextStyle(color: Colors.white70, fontSize: 14)),
-                          ],
-                        ),
-                        ElevatedButton(
-                          onPressed: () => _showWithdrawBottomSheet(context),
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.pink,
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-                          ),
-                          child: const Text("Withdraw", style: TextStyle(color: Colors.white)),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
+                    
+                    // Added Transaction History Widget
+                    const SizedBox(height: 24),
+                    _buildTransactionHistoryWidget(),
+                  ],
+                ),
               ),
             ),
             if (isDropdownOpen)
@@ -262,6 +284,139 @@ class _WalletState extends State<Wallet> {
     );
   }
 
+  // Transaction History Widget
+  Widget _buildTransactionHistoryWidget() {
+    return Container(
+      width: double.infinity,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(12),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.05),
+            blurRadius: 10,
+            offset: const Offset(0, 2),
+          ),
+        ],
+        border: Border.all(color: Colors.grey.shade200),
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          // Header section
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text(
+                  'Recent Transactions',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xFF333333),
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    // Handle "See All" button press
+                    print('See All pressed');
+                  },
+                  child: const Text(
+                    'See All',
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.purple,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          
+          // Divider
+          const Divider(height: 1, thickness: 1, color: Color(0xFFEEEEEE)),
+          
+          // Transactions list
+          ListView.separated(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: _transactions.length,
+            separatorBuilder: (context, index) => const Divider(
+              height: 1, 
+              thickness: 1, 
+              color: Color(0xFFEEEEEE),
+              indent: 16,
+              endIndent: 16,
+            ),
+            itemBuilder: (context, index) {
+              final transaction = _transactions[index];
+              return Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Row(
+                  children: [
+                    // Icon
+                    Container(
+                      padding: const EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        color: (transaction['iconColor'] as Color).withOpacity(0.1),
+                        shape: BoxShape.circle,
+                      ),
+                      child: Icon(
+                        transaction['icon'] as IconData,
+                        color: transaction['iconColor'] as Color,
+                        size: 20,
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                    
+                    // Transaction details
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            transaction['type'] as String,
+                            style: const TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w500,
+                              color: Color(0xFF333333),
+                            ),
+                          ),
+                          const SizedBox(height: 4),
+                          Text(
+                            transaction['date'] as String,
+                            style: TextStyle(
+                              fontSize: 14,
+                              color: Colors.grey[600],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    
+                    // Amount
+                    Text(
+                      transaction['isPositive'] 
+                        ? '+\$${transaction['amount'].toStringAsFixed(2)}' 
+                        : '-\$${transaction['amount'].toStringAsFixed(2)}',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                        color: transaction['isPositive'] ? Colors.green : Colors.red,
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            },
+          ),
+        ],
+      ),
+    );
+  }
+
   Widget _buildWithdrawModal() {
     return GestureDetector(
       onTap: () {
@@ -277,7 +432,7 @@ class _WalletState extends State<Wallet> {
             onTap: () {}, // Prevents tap from closing the modal
             child: Container(
               constraints: BoxConstraints(
-                maxHeight: MediaQuery.of(context).size.height * 0.85,
+                maxHeight: MediaQuery.of(context).size.height * 0.60,
               ),
               width: double.infinity,
               decoration: const BoxDecoration(
@@ -511,6 +666,7 @@ class _WalletState extends State<Wallet> {
 
   Widget _buildBankAccountItem(Map<String, dynamic> account) {
     final bool isSelected = account['id'] == _selectedAccount;
+  
     
     return GestureDetector(
       onTap: () {
@@ -562,6 +718,44 @@ class _WalletState extends State<Wallet> {
             if (isSelected)
               const Icon(Icons.check_circle, color: Colors.pinkAccent),
           ],
+        ),
+      ),
+    );
+  }
+
+   Widget _buildPeriodDropdown() {
+    String selectedPeriod = 'today';
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(8),
+       
+      ),
+      child: DropdownButtonHideUnderline(
+        child: DropdownButton<String>(
+          value: selectedPeriod,
+          icon: const Icon(Icons.keyboard_arrow_down),
+          isDense: true,
+          items: const [
+            DropdownMenuItem(
+              value: 'today',
+              child: Text('today'),
+            ),
+            DropdownMenuItem(
+              value: '1 days',
+              child: Text('1 days'),
+            ),
+            DropdownMenuItem(
+              value: '6 days',
+              child: Text('6 Days'),
+            ),
+          ],
+          onChanged: (String? newValue) {
+            if (newValue != null) {
+              setState(() => selectedPeriod = newValue);
+            }
+          },
         ),
       ),
     );

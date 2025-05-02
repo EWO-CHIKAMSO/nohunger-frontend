@@ -1,4 +1,5 @@
 
+
 import 'package:flutter/material.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -9,651 +10,383 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  int _value = 0;
-  bool _themeMode = false;
+  bool isOnline = true;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+    
       body: SingleChildScrollView(
-        padding: const EdgeInsets.only(top: 40),
-        physics: const BouncingScrollPhysics(),
         child: Column(
           children: [
-            // Profile Header Card
+            // Header Section
             Container(
-              padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                gradient: const LinearGradient(
-                  colors: [Color(0xFFDE006F), Color(0xFF902ED2)],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                ),
-              ),
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 16,
-                    vertical: 16,
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.start,
+              color: Colors.white,
+              padding: const EdgeInsets.all(24),
+              child: Column(
+                children: [
+                  Stack(
+                    alignment: Alignment.bottomRight,
                     children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          CircleAvatar(
-                            radius: 24,
-                            backgroundImage: NetworkImage(
-                              'https://picsum.photos/200/200?random= ${DateTime.now().millisecondsSinceEpoch}',
-                            ),
-                          ),
-                          const SizedBox(height: 8),
-                          const Text(
-                            'Easy Life',
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          const SizedBox(height: 4),
-                          Row(
-                            children: [
-                              const Icon(
-                                Icons.star,
-                                color: Colors.amber,
-                                size: 16,
-                              ),
-                              const SizedBox(width: 4),
-                              const Text(
-                                '5.0 (0)',
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 14,
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 8,
-                                ),
-                                child: Container(
-                                  height: 15,
-                                  width: 1,
-                                  color: Colors.grey,
-                                ),
-                              ),
-                              const Text(
-                                '16+ Products',
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 14,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
+                      const CircleAvatar(
+                        radius: 56,
+                        backgroundImage: NetworkImage(
+                          'https://readdy.ai/api/search-image?query=Professional%20food%20vendor%20portrait%20photo%2C%20middle-aged%20chef%20in%20white%20uniform%20smiling%20at%20camera%2C%20warm%20lighting%2C%20professional%20headshot%20style%2C%20neutral%20studio%20background%2C%20high%20quality%20professional%20photography%2C%20centered%20composition%2C%20friendly%20expression&width=120&height=120&seq=1&orientation=squarish',
+                        ),
                       ),
-                      // Offline indicator
                       Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 10,
-                          vertical: 5,
+                        padding: const EdgeInsets.all(4),
+                        decoration: const BoxDecoration(
+                          color: Colors.blue,
+                          shape: BoxShape.circle,
                         ),
-                        decoration: BoxDecoration(
-                          color: Colors.grey.shade300,
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: Row(
-                          children: [
-                            Container(
-                              width: 20,
-                              height: 20,
-                              decoration: BoxDecoration(
-                                color: Colors.grey.shade400,
-                                borderRadius: BorderRadius.circular(4),
-                              ),
-                            ),
-                            SizedBox(width: 8),
-                            const Text(
-                              'Offline',
-                              style: TextStyle(
-                                color: Colors.black54,
-                                fontSize: 14,
-                              ),
-                            ),
-                          ],
+                        child: const Icon(
+                          Icons.check,
+                          size: 12,
+                          color: Colors.white,
                         ),
                       ),
                     ],
                   ),
-                ),
-              ),
-            ),
-            const SizedBox(height: 20),
-
-            // Theme Mode and Language Selection
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
+                  const SizedBox(height: 16),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       const Text(
-                        'Theme Mode',
+                        'Fresh Harvest Kitchen',
                         style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
                       const SizedBox(width: 8),
-                      Switch(
-                        value: _themeMode,
-                        activeColor: Colors.purpleAccent,
-                        onChanged: (value) {
-                          setState(() {
-                            _themeMode = value;
-                          });
-                        },
+                      Icon(
+                        Icons.verified,
+                        color: Colors.blue[500],
+                        size: 20,
                       ),
                     ],
                   ),
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 10,
-                      vertical: 5,
+                  const SizedBox(height: 4),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.location_on,
+                        size: 14,
+                        color: Colors.grey[600],
+                      ),
+                      const SizedBox(width: 4),
+                      Text(
+                        'Brooklyn, New York',
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: Colors.grey[600],
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    'Organic Food & Groceries',
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: Colors.grey[600],
                     ),
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey.shade300),
-                      borderRadius: BorderRadius.circular(8),
+                  ),
+                  const SizedBox(height: 16),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        isOnline ? 'Store Online' : 'Store Offline',
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: isOnline ? Colors.green : Colors.grey,
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            isOnline = !isOnline;
+                          });
+                        },
+                        child: Container(
+                          width: 44,
+                          height: 24,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(12),
+                            color: isOnline ? Colors.green : Colors.grey[300],
+                          ),
+                          child: AnimatedAlign(
+                            duration: const Duration(milliseconds: 200),
+                            alignment: isOnline
+                                ? Alignment.centerRight
+                                : Alignment.centerLeft,
+                            child: Container(
+                              width: 16,
+                              height: 16,
+                              margin: const EdgeInsets.all(4),
+                              decoration: const BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            // Quick Stats Bar
+            Container(
+              margin: const EdgeInsets.only(top: 12),
+              padding: const EdgeInsets.all(16),
+              color: Colors.white,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  _buildStatItem(
+                    icon: Icon(
+                      Icons.star,
+                      color: Colors.amber[500],
+                      size: 16,
                     ),
-                    child: Row(
+                    value: '4.8',
+                    label: 'Rating',
+                  ),
+                  _buildStatItem(
+                    value: '1,254',
+                    label: 'Orders',
+                  ),
+                  _buildStatItem(
+                    value: '28m',
+                    label: 'Avg. Time',
+                  ),
+                  _buildStatItem(
+                    value: '2023',
+                    label: 'Since',
+                  ),
+                ],
+              ),
+            ),
+            // Management Sections
+            Padding(
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    'Store Management',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.grey,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  Card(
+                    elevation: 1,
+                    child: Column(
                       children: [
-                        const Icon(Icons.flag, size: 16),
-                        const SizedBox(width: 4),
-                        const Text('English'),
-                        const SizedBox(width: 4),
-                        const Icon(Icons.arrow_drop_down, size: 16),
+                        _buildMenuButton(
+                          icon: Icon(
+                            Icons.store,
+                            color: Colors.blue[600],
+                          ),
+                          title: 'Store Settings',
+                          color: Colors.blue[100],
+                        ),
+                        const Divider(height: 1),
+                        _buildMenuButton(
+                          icon: Icon(
+                            Icons.restaurant,
+                            color: Colors.green[600],
+                          ),
+                          title: 'Menu Management',
+                          color: Colors.green[100],
+                        ),
+                        const Divider(height: 1),
+                        _buildMenuButton(
+                          icon: Icon(
+                            Icons.history,
+                            color: Colors.purple[600],
+                          ),
+                          title: 'Order History',
+                          color: Colors.purple[100],
+                        ),
+                        const Divider(height: 1),
+                        _buildMenuButton(
+                          icon: Icon(
+                            Icons.show_chart,
+                            color: Colors.amber[600],
+                          ),
+                          title: 'Earnings & Analytics',
+                          color: Colors.amber[100],
+                        ),
+                        const Divider(height: 1),
+                        _buildMenuButton(
+                          icon: Icon(
+                            Icons.star,
+                            color: Colors.orange[600],
+                          ),
+                          title: 'Reviews & Ratings',
+                          color: Colors.orange[100],
+                        ),
                       ],
                     ),
                   ),
                 ],
               ),
             ),
-
-            const SizedBox(height: 20),
-
-            // User Info Section
+            // Account Controls
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: UserInfoWidget(),
-            ),
-
-            const SizedBox(height: 20),
-
-            // Shop Info Section
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: ShopInfoWidget(),
-            ),
-            const SizedBox(height: 10),
-            // productnavigation
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(12),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.shade200,
-                      blurRadius: 5,
-                      spreadRadius: 1,
-                    ),
-                  ],
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: [
-                          Icon(Icons.wallet_giftcard_outlined,color: Colors.purpleAccent,),
-                          Text("products",style: TextStyle(fontSize: 18,fontWeight:FontWeight.w700)),
-                          Text("(16 items)",style: TextStyle(fontSize: 16,fontWeight:FontWeight.w100,color: Colors.grey.shade500),
-                         )]),
-                      Icon(Icons.arrow_forward_ios,color: Colors.purpleAccent,),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(height: 20),
-            // Shop Settings Section
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: ShopSettingWidget(),
-            ),
-            // shop banners section
-            Padding(padding: EdgeInsets.symmetric(horizontal: 20,vertical: 8),
-            child:  ShopBanner(),)
-          ],
-        ),
-      ),
-    );
-  }
-
-
-  Widget ShopBanner(){
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.shade200,
-            blurRadius: 5,
-            spreadRadius: 1,
-          ),
-        ],
-      ),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 16,horizontal: 16),
-        child: Column(
-          children: [
-            Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
-                    children: [
-                      const Icon(Icons.settings, color: Colors.red, size: 22),
-                      const SizedBox(width: 8),
-                      const Text(
-                        'Shop Banners',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
+                  const Text(
+                    'Account',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.grey,
+                    ),
                   ),
-                  const Icon(Icons.edit_outlined, color: Colors.red, size: 20),
+                  const SizedBox(height: 8),
+                  Card(
+                    elevation: 1,
+                    child: Column(
+                      children: [
+                        _buildMenuButton(
+                          icon: Icon(
+                            Icons.settings,
+                            color: Colors.teal[600],
+                          ),
+                          title: 'Account Settings',
+                          color: Colors.teal[100],
+                        ),
+                        const Divider(height: 1),
+                        _buildMenuButton(
+                          icon: Icon(
+                            Icons.headset_mic,
+                            color: Colors.indigo[600],
+                          ),
+                          title: 'Help & Support',
+                          color: Colors.indigo[100],
+                        ),
+                        const Divider(height: 1),
+                        _buildMenuButton(
+                          icon: Icon(
+                            Icons.logout,
+                            color: Colors.red[600],
+                          ),
+                          title: 'Logout',
+                          color: Colors.red[100],
+                        ),
+                      ],
+                    ),
+                  ),
                 ],
               ),
-              SizedBox(height: 16,),
-        
-              Column(
+            ),
+            // Footer
+            const Padding(
+              padding: EdgeInsets.all(16),
+              child: Column(
                 children: [
-                Container(
-                  width:280,
-                  height: 100,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                  image: DecorationImage(
-                    image: NetworkImage('https://picsum.photos/200/300'),
-                    fit: BoxFit.fill,
-                  ),
-                  ),
-                ),
-                SizedBox(height: 15,),
-                Container(
-                  width:280,
-                  height: 100,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                  image: DecorationImage(
-                    image: NetworkImage('https://picsum.photos/200/400'),
-                    fit: BoxFit.fill,
-                  ),
-                  ),
-                ),
-          ])
-          ]
-        ),
-      ),
-    );
-  }
-}
-
-class UserInfoWidget extends StatelessWidget {
-  const UserInfoWidget({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.shade200,
-            blurRadius: 5,
-            spreadRadius: 1,
-          ),
-        ],
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  children: [
-                    const Icon(Icons.person, color: Colors.red, size: 22),
-                    const SizedBox(width: 8),
-                    const Text(
-                      'User Info',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
+                  Text(
+                    'App Version 2.5.3',
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: Colors.grey,
                     ),
-                  ],
-                ),
-                const Icon(Icons.edit_outlined, color: Colors.red, size: 20),
-              ],
+                  ),
+                  SizedBox(height: 4),
+                  Text(
+                    '© 2025 Fresh Harvest Kitchen. All rights reserved.',
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: Colors.grey,
+                    ),
+                  ),
+                ],
+              ),
             ),
-            const SizedBox(height: 16),
-            Row(
-              children: [
-                _buildInfoRow('Full Name', 'ramu Abedin'),
-                SizedBox(width: 50),
-                _buildInfoRow('Phone Number', '01100088800'),
-              ],
-            ),
-
-            Row(
-              children: [
-                _buildInfoRow('Gender', 'Male'),
-                SizedBox(width: 80),
-                _buildInfoRow('Email', 'shop@readyecommerc...'),
-              ],
-            ),
+            const SizedBox(height: 80), // Space for bottom navigation
           ],
         ),
       ),
+     
     );
   }
 
-  Widget _buildInfoRow(String label, String value) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 15),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            label,
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w500,
-              color: Colors.grey.shade600,
-            ),
-          ),
+  Widget _buildStatItem({Widget? icon, required String value, required String label}) {
+    return Column(
+      children: [
+        if (icon != null)
+          Row(
+            children: [
+              icon,
+              const SizedBox(width: 4),
+              Text(
+                value,
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          )
+        else
           Text(
             value,
-            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+            style: const TextStyle(
+              fontWeight: FontWeight.bold,
+            ),
           ),
-        ],
-      ),
+        const SizedBox(height: 4),
+        Text(
+          label,
+          style: TextStyle(
+            fontSize: 12,
+            color: Colors.grey[600],
+          ),
+        ),
+      ],
     );
   }
-}
 
-class ShopInfoWidget extends StatelessWidget {
-  const ShopInfoWidget({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.shade200,
-            blurRadius: 5,
-            spreadRadius: 1,
-          ),
-        ],
+  Widget _buildMenuButton({
+    required Widget icon,
+    required String title,
+    required Color? color,
+  }) {
+    return ListTile(
+      leading: Container(
+        width: 40,
+        height: 40,
+        decoration: BoxDecoration(
+          color: color,
+          shape: BoxShape.circle,
+        ),
+        child: Center(child: icon),
       ),
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  children: [
-                    const Icon(Icons.store, color: Colors.red, size: 22),
-                    const SizedBox(width: 8),
-                    const Text(
-                      'Shop Info',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ),
-                const Icon(Icons.edit_outlined, color: Colors.red, size: 20),
-              ],
-            ),
-            const SizedBox(height: 16),
-
-            Row(
-              children: [
-                _buildInfoRow('Shop name', 'Easy life'),
-                SizedBox(width: 50),
-                _buildInfoRow('Shop phone number', '10003344i4'),
-              ],
-            ),
-            _buildInfoRow('Address', 'Dhaka Bangladesh'),
-            _buildDescriptionSection(),
-          ],
+      title: Text(
+        title,
+        style: const TextStyle(
+          fontWeight: FontWeight.w500,
         ),
       ),
+      trailing: const Icon(
+        Icons.chevron_right,
+        color: Colors.grey,
+      ),
+      onTap: () {},
     );
   }
 
-  Widget _buildInfoRow(String label, String value) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 15),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            label,
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w500,
-              color: Colors.grey.shade600,
-            ),
-          ),
-          Text(
-            value,
-            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-          ),
-        ],
-      ),
-    );
-  }
 
-  Widget _buildDescriptionSection() {
-    return Container(
-      padding: const EdgeInsets.only(top: 15),
-      width: double.infinity,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            'Description',
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w500,
-              color: Colors.black54,
-            ),
-          ),
-          const SizedBox(height: 8),
-          Container(
-            padding: const EdgeInsets.all(12),
-            decoration: BoxDecoration(
-              color: Colors.grey.shade100,
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: const Text(
-              'Welcome to Easy Life, your go-to electronics shop! We offer the latest gadgets and accessories to simplify your life. Our expert staff is here to help you find exactly what you need!',
-              style: TextStyle(fontSize: 14, color: Colors.black87),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
 }
-
-
-
-
-class ShopSettingWidget extends StatelessWidget {
-  const ShopSettingWidget({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.shade200,
-            blurRadius: 5,
-            spreadRadius: 1,
-          ),
-        ],
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  children: [
-                    const Icon(Icons.settings, color: Colors.red, size: 22),
-                    const SizedBox(width: 8),
-                    const Text(
-                      'Shop Info',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ),
-                const Icon(Icons.edit_outlined, color: Colors.red, size: 20),
-              ],
-            ),
-            const SizedBox(height: 16),
-              _buildInfoRow('Estimated Delivery Time', '1 Days'),
-
-            Row(
-              children: [
-                _buildInfoRow('Openning Time', '10:00 AM'),
-                SizedBox(width: 50),
-                _buildInfoRow('Closing Time', '00:59 PM'),
-              ],
-            ),
-            Row(
-              children: [
-                _buildInfoRow('Off Days', 'Sat'),
-                SizedBox(width: 80),
-                _buildInfoRow('Order id prefix', 'RC'),
-              ],
-            ),
-            _buildInfoRow('Min. Order Amount', '1.0\$'),
-
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildInfoRow(String label, String value) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 15),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            label,
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w500,
-              color: Colors.grey.shade600,
-            ),
-          ),
-          Text(
-            value,
-            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-          ),
-        ],
-      ),
-    );
-  }
-
-  
-
-  Widget _buildDescriptionSection() {
-    return Container(
-      padding: const EdgeInsets.only(top: 15),
-      width: double.infinity,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            'Description',
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w500,
-              color: Colors.black54,
-            ),
-          ),
-          const SizedBox(height: 8),
-          Container(
-            padding: const EdgeInsets.all(12),
-            decoration: BoxDecoration(
-              color: Colors.grey.shade100,
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: const Text(
-              'Welcome to Easy Life, your go-to electronics shop! We offer the latest gadgets and accessories to simplify your life. Our expert staff is here to help you find exactly what you need!',
-              style: TextStyle(fontSize: 14, color: Colors.black87),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-
-
-
-
-

@@ -1,3 +1,4 @@
+
 import 'package:nohunger/screen/splash/splash_screen.dart';
 import 'package:nohunger/screen/user/screens/onboarding/onboarding_screen.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +8,7 @@ import 'package:nohunger/route/router.dart' as router;
 
 
 void main() {
+ 
   try {
     runApp(const MyApp());
   } catch (e, stackTrace) {
