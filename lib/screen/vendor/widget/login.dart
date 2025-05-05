@@ -8,6 +8,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:nohunger/entry_point.dart';
+import 'package:nohunger/screen/admin/admin_dasboard.dart';
 import 'package:nohunger/screen/logistic/ui/home_screen.dart';
 import 'package:nohunger/screen/vendor/ui/dashboard.dart';
 
@@ -53,6 +54,9 @@ class _UserLoginState extends State<UserLogin> {
         break;
       case 'Vendor':
         nextScreen = EcommerceDashboard(onGoToSecondPage: () {  },);
+        break;
+      case 'Admin':
+        nextScreen = AdminDashboard(onGoToSecondPage: () {  },);
         break;
       default:
         _showErrorMessage("Please select a valid role");
@@ -187,6 +191,7 @@ class _UserLoginState extends State<UserLogin> {
         DropdownMenuItem(value: "User", child: Text("User")),
         DropdownMenuItem(value: "Rider", child: Text("Rider")),
         DropdownMenuItem(value: "Vendor", child: Text("Vendor")),
+        DropdownMenuItem(value: "Admin", child: Text("Admin")),
       ],
       onChanged: (value) {
         setState(() {
