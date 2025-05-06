@@ -18,7 +18,7 @@ class AdminDashboard extends StatefulWidget {
 class _AdminDashboardState extends State<AdminDashboard> {
   String activeTab = 'New';
   String activeSection = 'dashboard';
-  bool fabDialogVisible = false;
+  bool fabDialogVisible = true;
 
   // Admin data
   final String adminName = "Sarah Johnson";
@@ -907,52 +907,63 @@ class _AdminDashboardState extends State<AdminDashboard> {
     );
   }
 
-  Widget _buildBottomNavBar() {
-    return BottomAppBar(
-      elevation: 8,
-      child: SizedBox(
-        height: 64,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            _buildNavItem(Icons.pie_chart_outline, 'Dashboard', 'dashboard'),
-            _buildNavItem(Icons.list_alt, 'Orders', 'orders'),
-            _buildNavItem(Icons.store, 'Vendors', 'vendors'),
-            _buildNavItem(Icons.inventory, 'Products', 'products'),
-            _buildNavItem(Icons.more_horiz, 'More', 'more'),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildNavItem(IconData icon, String label, String section) {
-    return InkWell(
-      onTap: () {
-        setState(() {
-          activeSection = section;
-          fabDialogVisible = false;
-        });
-      },
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+ Widget _buildBottomNavBar() {
+  return BottomAppBar(
+    height: 70,
+    shape: const CircularNotchedRectangle(),
+    color: Theme.of(context).brightness == Brightness.light
+        ? Colors.white
+        : const Color(0xFF101015),
+    child: SizedBox(
+      height: 60,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          Icon(
-            icon,
-            color: activeSection == section ? Colors.blue : Colors.grey,
-          ),
-          const SizedBox(height: 4),
-          Text(
-            label,
-            style: TextStyle(
-              fontSize: 12,
-              color: activeSection == section ? Colors.blue : Colors.grey,
-            ),
-          ),
+          _buildNavItem(Icons.grid_view, "Home", 'dashboard'),
+          _buildNavItem(Icons.store, "Vendors", 'vendors'),
+
+            _buildBookmarkButton(),
+          _buildNavItem(Icons.inventory, "Products", 'products'),
+          _buildNavItem(Icons.person_outline, "Profile", 'more'),
         ],
       ),
-    );
-  }
+    ),
+  );
+}
+
+
+
+
+Widget _buildNavItem(IconData icon, String label, String section) {
+  return GestureDetector(
+    onTap: () {
+      setState(() {
+        activeSection = section;
+        fabDialogVisible = false;
+      });
+    },
+    child: Column(
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Icon(
+          icon,
+          color: activeSection == section ? Colors.black : Colors.grey,
+          size: 24,
+        ),
+        const SizedBox(height: 4),
+        Text(
+          label,
+          style: TextStyle(
+            fontSize: 11,
+            color: activeSection == section ? Colors.black : Colors.grey,
+          ),
+        ),
+      ],
+    ),
+  );
+}
+
 
   Widget _buildFAB() {
     return Stack(
@@ -1021,4 +1032,26 @@ class _AdminDashboardState extends State<AdminDashboard> {
       ),
     );
   }
+
+  
 }
+
+ Widget _buildBookmarkButton() {
+    return GestureDetector(
+      child: Container(
+        height: 30,
+        width: 40,
+        decoration: BoxDecoration(
+          color: Colors.black,
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: Center(
+          child: SvgPicture.asset(
+            "assets/icons/user/down_arrow.svg",
+            height: 24,
+            color: Colors.white,
+          ),
+        ),
+      ),
+    );
+  }
