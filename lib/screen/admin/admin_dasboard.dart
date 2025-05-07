@@ -18,7 +18,7 @@ class AdminDashboard extends StatefulWidget {
 class _AdminDashboardState extends State<AdminDashboard> {
   String activeTab = 'New';
   String activeSection = 'dashboard';
-  bool fabDialogVisible = true;
+  bool fabDialogVisible = false;
 
   // Admin data
   final String adminName = "Sarah Johnson";
@@ -195,23 +195,31 @@ class _AdminDashboardState extends State<AdminDashboard> {
               border: Border(
                 bottom: BorderSide(color: Color(0xFFF3F4F6), width: 1),
             ),),
-            child: Column(
+            child:Row(
               crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Text(
-                  'Welcome, $adminName',
-                  style: const TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-                const SizedBox(height: 4),
-                Text(
-                  '$adminRole • May 2, 2025',
-                  style: const TextStyle(
-                    fontSize: 14,
-                    color: Colors.grey,
-                  ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Welcome, $adminName',
+                      style: TextStyle(
+                        fontSize: 18,
+                        color: Colors.black,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      '$adminRole • May 2, 2025',
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: Colors.grey.shade800
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
@@ -281,9 +289,9 @@ class _AdminDashboardState extends State<AdminDashboard> {
                       children: [
                         Text(
                         metric['title'],
-                        style: const TextStyle(
+                        style:  TextStyle(
                           fontSize: 14,
-                          color: Colors.grey,
+                          color: Colors.grey[800],
                         ),
                         ),
                         const SizedBox(height: 4),
@@ -291,6 +299,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
                         '${metric['value']}${metric['suffix'] ?? ''}',
                         style: const TextStyle(
                           fontSize: 20,
+                          color: Colors.black,
                           fontWeight: FontWeight.w600,
                         ),
                         ),
@@ -922,7 +931,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
           _buildNavItem(Icons.grid_view, "Home", 'dashboard'),
           _buildNavItem(Icons.store, "Vendors", 'vendors'),
 
-            _buildBookmarkButton(),
+            _buildCenteredButton(),
           _buildNavItem(Icons.inventory, "Products", 'products'),
           _buildNavItem(Icons.person_outline, "Profile", 'more'),
         ],
@@ -966,49 +975,45 @@ Widget _buildNavItem(IconData icon, String label, String section) {
 
 
   Widget _buildFAB() {
-    return Stack(
-      children: [
-        if (fabDialogVisible)
-          Positioned(
-            right: 16,
-            bottom: 80,
-            child: Material(
-              elevation: 8,
-              borderRadius: BorderRadius.circular(8),
-              child: Container(
-                width: 200,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: Column(
-                  children: [
-                    _buildFABAction(
-                        Icons.store, 'Add New Vendor', 'vendors'),
-                    _buildFABAction(
-                        Icons.list_alt, 'Create Order', 'orders'),
-                    _buildFABAction(
-                        Icons.inventory, 'Add Product', 'products'),
-                    _buildFABAction(
-                        Icons.local_offer, 'Create Promotion', 'more'),
-                  ],
-                ),
+  return Stack(
+    children: [
+      if (fabDialogVisible)
+        Positioned(
+          right: 16,
+          bottom: 200,
+          child: Material(
+            elevation: 8,
+            borderRadius: BorderRadius.circular(8),
+            child: Container(
+              width: 200,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Column(
+                children: [
+                  _buildFABAction(Icons.store, 'Add New Vendor', 'vendors'),
+                  _buildFABAction(Icons.list_alt, 'Create Order', 'orders'),
+                  _buildFABAction(Icons.inventory, 'Add Product', 'products'),
+                  _buildFABAction(Icons.local_offer, 'Create Promotion', 'more'),
+                ],
               ),
             ),
           ),
-        FloatingActionButton(
-          onPressed: () {
-            setState(() {
-              fabDialogVisible = !fabDialogVisible;
-            });
-          },
-          backgroundColor: Colors.blue,
-          child: const Icon(Icons.add, color: Colors.white),
         ),
-      ],
-    );
-  }
-
+      FloatingActionButton(
+        onPressed: () {
+          setState(() {
+            fabDialogVisible = !fabDialogVisible;
+            print(fabDialogVisible);
+          });
+        },
+        backgroundColor: Colors.blue,
+        child: Icon(fabDialogVisible ? Icons.close : Icons.add, color: Colors.white),
+      ),
+    ],
+  );
+}
   Widget _buildFABAction(IconData icon, String label, String section) {
     return InkWell(
       onTap: () {
@@ -1036,7 +1041,7 @@ Widget _buildNavItem(IconData icon, String label, String section) {
   
 }
 
- Widget _buildBookmarkButton() {
+ Widget _buildCenteredButton() {
     return GestureDetector(
       child: Container(
         height: 30,
