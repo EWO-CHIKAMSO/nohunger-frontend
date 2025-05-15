@@ -26,6 +26,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'noHunger',
       theme: AppTheme.lightTheme(context),
+      color: Color(0xFFF5F5F5),
       themeMode: ThemeMode.light,
       home: const SplashScreen(
         nextScreen: OnBordingScreen(),
