@@ -127,10 +127,12 @@ class _CreatePromotionScreenState extends State<CreatePromotionScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor:Color(0xFFF5F5F5),
       appBar: AppBar(
         title: const Text('Create Promotion'),
       ),
       body: SingleChildScrollView(
+      
         padding: const EdgeInsets.all(16.0),
         child: Form(
           key: _formKey,
@@ -141,6 +143,7 @@ class _CreatePromotionScreenState extends State<CreatePromotionScreen> {
                 'Promotion Details',
                 style: TextStyle(
                   fontSize: 18,
+                color: Colors.black,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -149,6 +152,7 @@ class _CreatePromotionScreenState extends State<CreatePromotionScreen> {
               // Promotion Name
               TextFormField(
                 decoration: const InputDecoration(
+                  fillColor: Colors.white,
                   labelText: 'Promotion Name',
                   border: OutlineInputBorder(),
                   prefixIcon: Icon(Icons.local_offer),
@@ -166,6 +170,7 @@ class _CreatePromotionScreenState extends State<CreatePromotionScreen> {
               TextFormField(
                 decoration: const InputDecoration(
                   labelText: 'Promotion Code',
+                  fillColor: Colors.white,
                   border: OutlineInputBorder(),
                   prefixIcon: Icon(Icons.code),
                   hintText: 'e.g., SUMMER25',
@@ -184,6 +189,7 @@ class _CreatePromotionScreenState extends State<CreatePromotionScreen> {
                 decoration: const InputDecoration(
                   labelText: 'Promotion Type',
                   border: OutlineInputBorder(),
+                  fillColor: Colors.white,
                   prefixIcon: Icon(Icons.category),
                 ),
                 value: _selectedType,
@@ -208,8 +214,9 @@ class _CreatePromotionScreenState extends State<CreatePromotionScreen> {
                   labelText: _selectedType == 'Percentage' 
                       ? 'Discount Percentage (%)' 
                       : _selectedType == 'Fixed Amount' 
-                          ? 'Discount Amount ($)' 
+                          ? 'Discount Amount (\$)' 
                           : 'Value',
+                          fillColor: Colors.white,
                   border: const OutlineInputBorder(),
                   prefixIcon: _selectedType == 'Percentage' 
                       ? const Icon(Icons.percent) 
@@ -240,6 +247,7 @@ class _CreatePromotionScreenState extends State<CreatePromotionScreen> {
                       decoration: const InputDecoration(
                         labelText: 'Start Date',
                         border: OutlineInputBorder(),
+                        fillColor: Colors.white,
                         prefixIcon: Icon(Icons.calendar_today),
                       ),
                       readOnly: true,
@@ -255,6 +263,7 @@ class _CreatePromotionScreenState extends State<CreatePromotionScreen> {
                       decoration: const InputDecoration(
                         labelText: 'End Date',
                         border: OutlineInputBorder(),
+                        fillColor: Colors.white,
                         prefixIcon: Icon(Icons.calendar_today),
                       ),
                       readOnly: true,
@@ -271,6 +280,7 @@ class _CreatePromotionScreenState extends State<CreatePromotionScreen> {
               TextFormField(
                 decoration: const InputDecoration(
                   labelText: 'Description',
+                  fillColor: Colors.white,
                   border: OutlineInputBorder(),
                   prefixIcon: Icon(Icons.description),
                 ),
@@ -300,6 +310,7 @@ class _CreatePromotionScreenState extends State<CreatePromotionScreen> {
                   'Select Products',
                   style: TextStyle(
                     fontSize: 18,
+                    color: Colors.black,
                     fontWeight: FontWeight.bold,
                   ),
                 ),

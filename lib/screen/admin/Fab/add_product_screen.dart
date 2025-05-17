@@ -34,6 +34,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor:Color(0xFFF5F5F5),
       appBar: AppBar(
         title: const Text('Add Product'),
       ),
@@ -48,6 +49,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                 'Product Information',
                 style: TextStyle(
                   fontSize: 18,
+                  color: Colors.black,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -94,6 +96,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                 decoration: const InputDecoration(
                   labelText: 'Product Name',
                   border: OutlineInputBorder(),
+                  fillColor: Colors.white,
                   prefixIcon: Icon(Icons.inventory),
                 ),
                 validator: (value) {
@@ -109,6 +112,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
               TextFormField(
                 decoration: const InputDecoration(
                   labelText: 'Product ID (SKU)',
+                  fillColor: Colors.white,
                   border: OutlineInputBorder(),
                   prefixIcon: Icon(Icons.qr_code),
                 ),
@@ -125,6 +129,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
               DropdownButtonFormField<String>(
                 decoration: const InputDecoration(
                   labelText: 'Category',
+                  fillColor: Colors.white,
                   border: OutlineInputBorder(),
                   prefixIcon: Icon(Icons.category),
                 ),
@@ -147,6 +152,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
               DropdownButtonFormField<String>(
                 decoration: const InputDecoration(
                   labelText: 'Vendor',
+                  fillColor: Colors.white,
                   border: OutlineInputBorder(),
                   prefixIcon: Icon(Icons.store),
                 ),
@@ -171,10 +177,11 @@ class _AddProductScreenState extends State<AddProductScreen> {
                   Expanded(
                     child: TextFormField(
                       controller: _priceController,
-                      decoration: const InputDecoration(
-                        labelText: 'Price ($)',
-                        border: OutlineInputBorder(),
-                        prefixIcon: Icon(Icons.attach_money),
+                      decoration: InputDecoration(
+                        labelText: 'Price \$',
+                        fillColor: Colors.white,
+                        border: const OutlineInputBorder(),
+                        prefixIcon: const Icon(Icons.attach_money),
                       ),
                       keyboardType: TextInputType.number,
                       validator: (value) {
@@ -194,6 +201,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                       controller: _stockController,
                       decoration: const InputDecoration(
                         labelText: 'Stock',
+                        fillColor: Colors.white,
                         border: OutlineInputBorder(),
                         prefixIcon: Icon(Icons.inventory_2),
                       ),
@@ -217,6 +225,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
               TextFormField(
                 decoration: const InputDecoration(
                   labelText: 'Description',
+                  fillColor: Colors.white,
                   border: OutlineInputBorder(),
                   prefixIcon: Icon(Icons.description),
                 ),

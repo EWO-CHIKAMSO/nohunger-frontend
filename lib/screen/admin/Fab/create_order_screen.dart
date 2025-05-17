@@ -120,273 +120,283 @@ class _CreateOrderScreenState extends State<CreateOrderScreen> {
       ),
       body: Form(
         key: _formKey,
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    'Order Information',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-                  
-                  // Vendor Dropdown
-                  DropdownButtonFormField<String>(
-                    decoration: const InputDecoration(
-                      labelText: 'Select Vendor',
-                      border: OutlineInputBorder(),
-                      prefixIcon: Icon(Icons.store),
-                    ),
-                    value: _selectedVendor,
-                    items: _vendors.map((String vendor) {
-                      return DropdownMenuItem<String>(
-                        value: vendor,
-                        child: Text(vendor),
-                      );
-                    }).toList(),
-                    onChanged: (String? newValue) {
-                      setState(() {
-                        _selectedVendor = newValue!;
-                      });
-                    },
-                  ),
-                  const SizedBox(height: 16),
-                  
-                  // Customer Information
-                  TextFormField(
-                    decoration: const InputDecoration(
-                      labelText: 'Customer Name',
-                      border: OutlineInputBorder(),
-                      prefixIcon: Icon(Icons.person),
-                    ),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter customer name';
-                      }
-                      return null;
-                    },
-                  ),
-                  const SizedBox(height: 16),
-                  
-                  TextFormField(
-                    decoration: const InputDecoration(
-                      labelText: 'Customer Phone',
-                      border: OutlineInputBorder(),
-                      prefixIcon: Icon(Icons.phone),
-                    ),
-                    keyboardType: TextInputType.phone,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter customer phone';
-                      }
-                      return null;
-                    },
-                  ),
-                  const SizedBox(height: 16),
-                  
-                  TextFormField(
-                    decoration: const InputDecoration(
-                      labelText: 'Delivery Address',
-                      border: OutlineInputBorder(),
-                      prefixIcon: Icon(Icons.location_on),
-                    ),
-                    maxLines: 2,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter delivery address';
-                      }
-                      return null;
-                    },
-                  ),
-                ],
-              ),
+        child: Container(
+           decoration: BoxDecoration(
+              color:Color(0xFFF5F5F5),
             ),
-            
-            // Products Section
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text(
-                    'Add Products',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  TextButton.icon(
-                    icon: const Icon(Icons.search),
-                    label: const Text('Search Products'),
-                    onPressed: () {
-                      _showProductSearchDialog();
-                    },
-                  ),
-                ],
-              ),
-            ),
-            
-            // Cart Items
-            Expanded(
-              child: _cartItems.isEmpty
-                  ? const Center(
-                      child: Text(
-                        'No items added to order yet',
-                        style: TextStyle(color: Colors.grey),
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      'Order Information',
+                      style: TextStyle(
+                        fontSize: 18,
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
                       ),
-                    )
-                  : ListView.builder(
-                      itemCount: _cartItems.length,
-                      itemBuilder: (context, index) {
-                        final item = _cartItems[index];
-                        return Card(
-                          margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Row(
-                              children: [
-                                Image.network(
-                                  item['image'],
-                                  width: 50,
-                                  height: 50,
-                                  errorBuilder: (context, error, stackTrace) => Container(
+                    ),
+                    const SizedBox(height: 16),
+                    
+                    // Vendor Dropdown
+                    DropdownButtonFormField<String>(
+                      decoration: const InputDecoration(
+                        labelText: 'Select Vendor',
+                        border: OutlineInputBorder(),
+                        fillColor: Colors.white,
+                        prefixIcon: Icon(Icons.store),
+                      ),
+                      value: _selectedVendor,
+                      items: _vendors.map((String vendor) {
+                        return DropdownMenuItem<String>(
+                          value: vendor,
+                          child: Text(vendor),
+                        );
+                      }).toList(),
+                      onChanged: (String? newValue) {
+                        setState(() {
+                          _selectedVendor = newValue!;
+                        });
+                      },
+                    ),
+                    const SizedBox(height: 16),
+                    
+                    // Customer Information
+                    TextFormField(
+                      decoration: const InputDecoration(
+                        labelText: 'Customer Name',
+                        fillColor: Colors.white,
+                        border: OutlineInputBorder(),
+                        prefixIcon: Icon(Icons.person),
+                      ),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter customer name';
+                        }
+                        return null;
+                      },
+                    ),
+                    const SizedBox(height: 16),
+                    
+                    TextFormField(
+                      decoration: const InputDecoration(
+                        labelText: 'Customer Phone',
+                        fillColor: Colors.white,
+                        border: OutlineInputBorder(),
+                        prefixIcon: Icon(Icons.phone),
+                      ),
+                      keyboardType: TextInputType.phone,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter customer phone';
+                        }
+                        return null;
+                      },
+                    ),
+                    const SizedBox(height: 16),
+                    
+                    TextFormField(
+                      decoration: const InputDecoration(
+                        labelText: 'Delivery Address',
+                        fillColor: Colors.white,
+                        border: OutlineInputBorder(),
+                        prefixIcon: Icon(Icons.location_on),
+                      ),
+                      maxLines: 2,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter delivery address';
+                        }
+                        return null;
+                      },
+                    ),
+                  ],
+                ),
+              ),
+              
+              // Products Section
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      'Add Products',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    TextButton.icon(
+                      icon: const Icon(Icons.search),
+                      label: const Text('Search Products'),
+                      onPressed: () {
+                        _showProductSearchDialog();
+                      },
+                    ),
+                  ],
+                ),
+              ),
+              
+              // Cart Items
+              Expanded(
+                child: _cartItems.isEmpty
+                    ? const Center(
+                        child: Text(
+                          'No items added to order yet',
+                          style: TextStyle(color: Colors.grey),
+                        ),
+                      )
+                    : ListView.builder(
+                        itemCount: _cartItems.length,
+                        itemBuilder: (context, index) {
+                          final item = _cartItems[index];
+                          return Card(
+                            margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Row(
+                                children: [
+                                  Image.network(
+                                    item['image'],
                                     width: 50,
                                     height: 50,
-                                    color: Colors.grey.shade200,
-                                    child: const Icon(Icons.image, color: Colors.grey),
+                                    errorBuilder: (context, error, stackTrace) => Container(
+                                      width: 50,
+                                      height: 50,
+                                      color: Colors.grey.shade200,
+                                      child: const Icon(Icons.image, color: Colors.grey),
+                                    ),
                                   ),
-                                ),
-                                const SizedBox(width: 12),
-                                Expanded(
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                  const SizedBox(width: 12),
+                                  Expanded(
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          item['name'],
+                                          style: const TextStyle(fontWeight: FontWeight.bold),
+                                        ),
+                                        Text(
+                                          '\$${item['price'].toStringAsFixed(2)}',
+                                          style: const TextStyle(color: Colors.blue),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Row(
                                     children: [
-                                      Text(
-                                        item['name'],
-                                        style: const TextStyle(fontWeight: FontWeight.bold),
+                                      IconButton(
+                                        icon: const Icon(Icons.remove_circle_outline),
+                                        onPressed: () {
+                                          _updateQuantity(index, item['quantity'] - 1);
+                                        },
                                       ),
                                       Text(
-                                        '\$${item['price'].toStringAsFixed(2)}',
-                                        style: const TextStyle(color: Colors.blue),
+                                        item['quantity'].toString(),
+                                        style: const TextStyle(fontWeight: FontWeight.bold),
+                                      ),
+                                      IconButton(
+                                        icon: const Icon(Icons.add_circle_outline),
+                                        onPressed: () {
+                                          _updateQuantity(index, item['quantity'] + 1);
+                                        },
+                                      ),
+                                      IconButton(
+                                        icon: const Icon(Icons.delete_outline, color: Colors.red),
+                                        onPressed: () {
+                                          _removeFromCart(index);
+                                        },
                                       ),
                                     ],
                                   ),
-                                ),
-                                Row(
-                                  children: [
-                                    IconButton(
-                                      icon: const Icon(Icons.remove_circle_outline),
-                                      onPressed: () {
-                                        _updateQuantity(index, item['quantity'] - 1);
-                                      },
-                                    ),
-                                    Text(
-                                      item['quantity'].toString(),
-                                      style: const TextStyle(fontWeight: FontWeight.bold),
-                                    ),
-                                    IconButton(
-                                      icon: const Icon(Icons.add_circle_outline),
-                                      onPressed: () {
-                                        _updateQuantity(index, item['quantity'] + 1);
-                                      },
-                                    ),
-                                    IconButton(
-                                      icon: const Icon(Icons.delete_outline, color: Colors.red),
-                                      onPressed: () {
-                                        _removeFromCart(index);
-                                      },
-                                    ),
-                                  ],
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
-                          ),
-                        );
-                      },
-                    ),
-            ),
-            
-            // Order Summary
-            Container(
-              padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.1),
-                    blurRadius: 4,
-                    offset: const Offset(0, -2),
-                  ),
-                ],
-              ),
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Text('Subtotal'),
-                      Text('\$${_subtotal.toStringAsFixed(2)}'),
-                    ],
-                  ),
-                  const SizedBox(height: 8),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text('Tax (${(_taxRate * 100).toStringAsFixed(0)}%)'),
-                      Text('\$${_tax.toStringAsFixed(2)}'),
-                    ],
-                  ),
-                  const Divider(),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Text(
-                        'Total',
-                        style: TextStyle(fontWeight: FontWeight.bold),
+                          );
+                        },
                       ),
-                      Text(
-                        '\$${_total.toStringAsFixed(2)}',
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18,
-                          color: Colors.blue,
+              ),
+              
+              // Order Summary
+              Container(
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.1),
+                      blurRadius: 4,
+                      offset: const Offset(0, -2),
+                    ),
+                  ],
+                ),
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text('Subtotal'),
+                        Text('\$${_subtotal.toStringAsFixed(2)}'),
+                      ],
+                    ),
+                    const SizedBox(height: 8),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text('Tax (${(_taxRate * 100).toStringAsFixed(0)}%)'),
+                        Text('\$${_tax.toStringAsFixed(2)}'),
+                      ],
+                    ),
+                    const Divider(),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text(
+                          'Total',
+                          style: TextStyle(fontWeight: FontWeight.bold),
                         ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 16),
-                  SizedBox(
-                    width: double.infinity,
-                    height: 50,
-                    child: ElevatedButton(
-                      onPressed: _cartItems.isEmpty
-                          ? null
-                          : () {
-                              if (_formKey.currentState!.validate()) {
-                                // Process order
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(content: Text('Order created successfully')),
-                                );
-                                Navigator.pop(context);
-                              }
-                            },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.blue,
-                        foregroundColor: Colors.white,
-                      ),
-                      child: const Text('Create Order'),
+                        Text(
+                          '\$${_total.toStringAsFixed(2)}',
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                            color: Colors.blue,
+                          ),
+                        ),
+                      ],
                     ),
-                  ),
-                ],
+                    const SizedBox(height: 16),
+                    SizedBox(
+                      width: double.infinity,
+                      height: 50,
+                      child: ElevatedButton(
+                        onPressed: _cartItems.isEmpty
+                            ? null
+                            : () {
+                                if (_formKey.currentState!.validate()) {
+                                  // Process order
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(content: Text('Order created successfully')),
+                                  );
+                                  Navigator.pop(context);
+                                }
+                              },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.blue,
+                          foregroundColor: Colors.white,
+                        ),
+                        child: const Text('Create Order'),
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

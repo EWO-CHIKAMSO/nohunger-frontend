@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:nohunger/screen/admin/Fab/add_product_screen.dart';
+import 'package:nohunger/screen/admin/Fab/add_vendor_screen.dart';
+import 'package:nohunger/screen/admin/Fab/create_order_screen.dart';
+import 'package:nohunger/screen/admin/Fab/create_promotion_screen.dart';
+import 'package:nohunger/screen/admin/nav/home_screen.dart';
+import 'package:nohunger/screen/admin/nav/product_screen.dart';
+import 'package:nohunger/screen/admin/nav/profile_screen.dart';
+import 'package:nohunger/screen/admin/nav/vendor_catalog.dart';
 
-// Import all the screen files
-import 'screens/home_screen.dart';
-import 'screens/vendors_screen.dart';
-import 'screens/products_screen.dart';
-import 'screens/profile_screen.dart';
-import 'screens/add_vendor_screen.dart';
-import 'screens/create_order_screen.dart';
-import 'screens/add_product_screen.dart';
-import 'screens/create_promotion_screen.dart';
 
 class AdminDashboard extends StatefulWidget {
   final VoidCallback onGoToSecondPage;
@@ -40,8 +39,11 @@ class _AdminDashboardState extends State<AdminDashboard> {
 
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
+    
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Row(
           children: [
             const Icon(Icons.restaurant, color: Colors.blue),
@@ -256,7 +258,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
                 child: Column(
                   children: [
                     _buildFABAction(Icons.store, 'Add New Vendor', () {
-                      _navigateToScreen(const AddVendorScreen());
+                      _navigateToScreen(const GroupSettingsScreen());
                     }),
                     _buildFABAction(Icons.list_alt, 'Create Order', () {
                       _navigateToScreen(const CreateOrderScreen());
@@ -365,18 +367,10 @@ class _AdminDashboardState extends State<AdminDashboard> {
   }
 
   Widget _buildCenteredButton() {
+    
     return GestureDetector(
-      onTap: () {
-        setState(() {
-          fabDialogVisible = !fabDialogVisible;
-          if (fabDialogVisible) {
-            _showFABDialog(context);
-          } else {
-            _optionsOverlayEntry?.remove();
-            _optionsOverlayEntry = null;
-          }
-        });
-        _showCustomTooltip(context);
+      onTap:(){
+        Navigator.pop(context);
       },
       child: Container(
         height: 30,
@@ -394,6 +388,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
         ),
       ),
     );
+    
   }
 }
 
