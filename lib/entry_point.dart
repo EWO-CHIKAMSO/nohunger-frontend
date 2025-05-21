@@ -85,7 +85,7 @@ class _EntryPointState extends State<EntryPoint> {
 
     return Scaffold(
       appBar: CustomAppbar(
-        onAddressPress: () => showAddressBottomSheet(context),
+         onAddressPress: () => showAddressBottomSheet(context),
         onSearchPress: () {
           Navigator.pushNamed(context, searchScreenRoute);
         },

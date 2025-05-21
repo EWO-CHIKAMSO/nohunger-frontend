@@ -39,26 +39,18 @@ class FlashSale extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             // Find demoFlashSaleProducts on models/ProductModel.dart
             itemCount: demoFlashSaleProducts.length,
-            itemBuilder: (context, index) => Padding(
-              padding: EdgeInsets.only(
-                left: defaultPadding,
-                right: index == demoFlashSaleProducts.length - 1
-                    ? defaultPadding
-                    : 0,
-              ),
-              child: ProductCard(
-                image: demoFlashSaleProducts[index].image,
-                brandName: demoFlashSaleProducts[index].brandName,
-                title: demoFlashSaleProducts[index].title,
-                price: demoFlashSaleProducts[index].price,
-                priceAfterDiscount:
-                    demoFlashSaleProducts[index].priceAfterDiscount,
-                dicountpercent: demoFlashSaleProducts[index].dicountpercent,
-                press: () {
-                  Navigator.pushNamed(context, productDetailsScreenRoute,
-                      arguments: index.isEven);
-                },
-              ),
+            itemBuilder: (context, index) => ProductCard(
+              image: demoFlashSaleProducts[index].image,
+              brandName: demoFlashSaleProducts[index].brandName,
+              title: demoFlashSaleProducts[index].title,
+              price: demoFlashSaleProducts[index].price,
+              priceAfterDiscount:
+                  demoFlashSaleProducts[index].priceAfterDiscount,
+              dicountpercent: demoFlashSaleProducts[index].dicountpercent,
+              press: () {
+                Navigator.pushNamed(context, productDetailsScreenRoute,
+                    arguments: index.isEven);
+              },
             ),
           ),
         ),

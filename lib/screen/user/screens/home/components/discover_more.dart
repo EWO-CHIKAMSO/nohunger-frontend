@@ -7,7 +7,7 @@ class DiscoverMore extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: defaultPadding * 1.5, horizontal: defaultPadding),
+      padding: const EdgeInsets.symmetric(vertical:0, horizontal: defaultPadding),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

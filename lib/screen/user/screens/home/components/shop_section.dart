@@ -14,9 +14,9 @@ class ShopSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const SizedBox(height: defaultPadding * 1.5),
+        const SizedBox(height: defaultPadding * 1.2),
         SectionHeader(
-          title: "Best Stores",
+          title: "Best Vendors",
           onViewMore: () {
             // Handle View More action
           },

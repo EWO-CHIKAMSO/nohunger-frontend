@@ -26,8 +26,8 @@ class SectionHeader extends StatelessWidget {
               onPressed: onViewMore,
               child: Row(
                 children: [
-                  Text("View More", style: TextStyle(color: Colors.pink[300], fontSize: 14)),
-                  Icon(Icons.arrow_forward, size: 16, color: Colors.pink[300]),
+                  Text("See All", style: TextStyle(color: Colors.indigo, fontSize: 14)),
+                  
                 ],
               ),
             ),

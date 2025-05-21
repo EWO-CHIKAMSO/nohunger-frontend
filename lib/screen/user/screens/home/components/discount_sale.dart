@@ -21,12 +21,7 @@ class DiscountSale extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const SizedBox(height: defaultPadding * 1.5),
-        SectionHeader(
-          title:  "Discount Stocks",
-          onViewMore: () {
-            // Handle View More action
-          },
-        ),
+      
         // While loading use 👇
         // SeconderyProductsSkelton(),
         SizedBox(
