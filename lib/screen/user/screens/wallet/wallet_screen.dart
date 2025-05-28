@@ -11,6 +11,7 @@ class WalletScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color.fromARGB(236, 243, 242, 242),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: defaultPadding),
@@ -33,8 +34,10 @@ class WalletScreen extends StatelessWidget {
                   ),
                 ),
               ),
+              SliverToBoxAdapter(child: SizedBox(height: 30,),),
+              
               SliverPadding(
-                padding: const EdgeInsets.only(top: defaultPadding / 2),
+                padding: const EdgeInsets.only(top: 140),
                 sliver: SliverToBoxAdapter(
                   child: Text(
                     "Wallet history",
@@ -45,7 +48,7 @@ class WalletScreen extends StatelessWidget {
               SliverList(
                 delegate: SliverChildBuilderDelegate(
                   (context, index) => Padding(
-                    padding: const EdgeInsets.only(top: defaultPadding),
+                    padding: const EdgeInsets.only(top: defaultPadding +10),
                     child: WalletHistoryCard(
                       isReturn: index == 1,
                       date: "JUN 12, 2020",

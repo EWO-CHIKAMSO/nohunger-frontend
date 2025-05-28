@@ -1,8 +1,8 @@
-import 'package:nohunger/screen/user/components/product/secondary_product_card.dart';
-import 'package:nohunger/utilities/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:nohunger/components/naira_svg_icon.dart'; // Add this import
+import 'package:nohunger/components/naira_svg_icon.dart';
+import 'package:nohunger/screen/user/components/product/secondary_product_card.dart';
+import 'package:nohunger/utilities/constants.dart';
 
 class WalletHistoryCard extends StatelessWidget {
   const WalletHistoryCard({
@@ -20,67 +20,90 @@ class WalletHistoryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final iconColor = isReturn ? successColor : errorColor;
+    final amountPrefix = isReturn ? "+" : "-";
+
     return Container(
+      margin: const EdgeInsets.symmetric(vertical: 12),
+      padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        borderRadius:
-            const BorderRadius.all(Radius.circular(defaultBorderRadious)),
-        border: Border.all(color: Theme.of(context).dividerColor),
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: const [
+          BoxShadow(
+            color: Colors.black12,
+            blurRadius: 12,
+            offset: Offset(0, 6),
+          ),
+        ],
       ),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          ListTile(
-            minLeadingWidth: 24,
-            leading: SvgPicture.asset(
-              isReturn ? "assets/icons/Return.svg" : "assets/icons/Product.svg",
-              color: Theme.of(context).iconTheme.color,
-              height: 24,
-              width: 24,
-            ),
-            title: Text(isReturn ? "Return" : "Purchase"),
-            subtitle: Padding(
-              padding: const EdgeInsets.only(top: defaultPadding / 4),
-              child: Text(
-                date,
-                style: TextStyle(
-                    fontSize: 12,
-                    color: Theme.of(context).textTheme.bodyMedium!.color),
+          // Header Row
+          Row(
+            children: [
+              CircleAvatar(
+                radius: 20,
+                backgroundColor: iconColor,
+                child: SvgPicture.asset(
+                  isReturn ? "assets/icons/Return.svg" : "assets/icons/Product.svg",
+                  height: 20,
+                  width: 20,
+                  color: iconColor,
+                ),
               ),
-            ),
-            trailing: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                NairaSvgIcon(
-                  color: isReturn ? successColor : errorColor,
+              const SizedBox(width: 12),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      isReturn ? "Return" : "Purchase",
+                      style: Theme.of(context).textTheme.titleMedium,
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      date,
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(color: Colors.grey[600]),
+                    ),
+                  ],
                 ),
-                Text(
-                  isReturn
-                      ? "+ ${amount.toStringAsFixed(2)}"
-                      : "- ${amount.toStringAsFixed(2)}",
-                  style: Theme.of(context)
-                      .textTheme
-                      .titleSmall!
-                      .copyWith(color: isReturn ? successColor : errorColor),
-                ),
-              ],
-            ),
+              ),
+              Row(
+                children: [
+                  NairaSvgIcon(color: iconColor),
+                  const SizedBox(width: 4),
+                  Text(
+                    "$amountPrefix${amount.toStringAsFixed(2)}",
+                    style: Theme.of(context)
+                        .textTheme
+                        .titleMedium!
+                        .copyWith(color: iconColor, fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
+            ],
           ),
-          const Divider(height: 1),
-          const SizedBox(height: defaultPadding),
-          ...List.generate(
-            products.length,
-            (index) => Padding(
-              padding: const EdgeInsets.only(
-                  bottom: defaultPadding,
-                  left: defaultPadding,
-                  right: defaultPadding),
-              child: SecondaryProductCard(
-                image: products[index].image,
-                brandName: products[index].brandName,
-                title: products[index].title,
-                price: products[index].price,
-                priceAfterDiscount: products[index].priceAfterDiscount,
-                 press: () {  },
-                
+
+          const SizedBox(height: 16),
+          const Divider(thickness: 1),
+          const SizedBox(height: 12),
+
+          // Product List
+          Column(
+            children: List.generate(
+              products.length,
+              (index) => Padding(
+                padding: const EdgeInsets.only(bottom: 12),
+                child: SecondaryProductCard(
+                  image: products[index].image,
+                  brandName: products[index].brandName,
+                  title: products[index].title,
+                  price: products[index].price,
+                  priceAfterDiscount: products[index].priceAfterDiscount,
+                  press: () {},
+                ),
               ),
             ),
           ),
@@ -89,6 +112,7 @@ class WalletHistoryCard extends StatelessWidget {
     );
   }
 }
+
 
 
 

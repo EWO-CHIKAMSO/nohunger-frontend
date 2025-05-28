@@ -70,41 +70,53 @@ class WalletBalanceCard extends StatelessWidget {
               const SizedBox(height: defaultPadding),
               
               // Second Row - Balance Info
-              Row(
-                children: [
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text(
-                          "Active Balance",
-                          style: TextStyle(
-                            color: Colors.white70,
-                            fontSize: 14,
-                          ),
-                        ),
-                        Row(
+              Container(
+                decoration: BoxDecoration(
+                  color: Colors.white.withOpacity(0.5),
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 18),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const NairaSvgIcon(color: Colors.white), // Use NairaSvgIcon here
-                            const SizedBox(width: 4), // Add some space between the icon and the balance
-                            Text(
-                              balance.toStringAsFixed(2),
-                              style: const TextStyle(
+                            const Text(
+                              "Active Balance",
+                              style: TextStyle(
                                 color: Colors.white,
-                                fontSize: 24,
-                                fontWeight: FontWeight.bold,
+                                fontSize: 14,
                               ),
+                            ),
+                            Row(
+                              children: [
+                                const NairaSvgIcon(color: Colors.white), // Use NairaSvgIcon here
+                                const SizedBox(width: 4), // Add some space between the icon and the balance
+                                Text(
+                                  balance.toStringAsFixed(2),
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 24,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
                             ),
                           ],
                         ),
-                      ],
-                    ),
+                      ),
+                     MaterialButton(onPressed: (){},
+                     
+
+                     child: Row(children: [
+                      Icon(Icons.add,color: Colors.white,),
+                      Text("Add Money",style: TextStyle(color: Colors.white),)
+                     ],),)
+                    ],
                   ),
-                  IconButton(
-                    icon: const Icon(Icons.keyboard_arrow_down, color: Colors.white),
-                    onPressed: () {},
-                  ),
-                ],
+                ),
               ),
               // Add extra padding at bottom to account for overlapping container
               const SizedBox(height: 60),
@@ -116,31 +128,75 @@ class WalletBalanceCard extends StatelessWidget {
         Positioned(
           left: defaultPadding,
           right: defaultPadding,
-          bottom: -50, // Negative value makes it overlap the blue container
-          child: Container(
-            padding: const EdgeInsets.all(defaultPadding),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(defaultBorderRadious),
-              boxShadow: [
-                BoxShadow(
-                  offset: const Offset(0, 2),
-                  blurRadius: 4,
-                  color: Colors.black.withOpacity(0.1),
+          bottom: -250, // Negative value makes it overlap the blue container
+          child: Column(
+            children: [
+              Container(
+                padding: const EdgeInsets.all(defaultPadding),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(defaultBorderRadious),
+                  boxShadow: [
+                    BoxShadow(
+                      offset: const Offset(0, 2),
+                      blurRadius: 4,
+                      color: Colors.black.withOpacity(0.1),
+                    ),
+                  ],
                 ),
-              ],
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                _buildActionButton(Icons.swap_horiz, "Transfer"),
-                _buildActionButton(Icons.payment, "Payment"),
-                _buildActionButton(Icons.shopping_cart, "Shop"),
-                _buildActionButton(Icons.grid_view, "Other"),
-              ],
-            ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    _buildActionButton(Icons.swap_horiz, "Transfer"),
+                    _buildActionButton(Icons.payment, "Payment"),
+                    _buildActionButton(Icons.shopping_cart, "Shop"),
+                    _buildActionButton(Icons.grid_view, "Other"),
+                  ],
+                ),
+              ),
+
+              SizedBox(height: 16,),
+              Container(
+                padding: const EdgeInsets.all(defaultPadding),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(defaultBorderRadious),
+                  boxShadow: [
+                    BoxShadow(
+                      offset: const Offset(0, 2),
+                      blurRadius: 4,
+                      color: Colors.black.withOpacity(0.1),
+                    ),
+                  ],
+                ),
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        _buildActionButton(Icons.network_wifi, "Airtime"),
+                        _buildActionButton(Icons.data_saver_off_sharp, "Data"),
+                        _buildActionButton(Icons.sports_football_sharp, "Betting"),
+                        _buildActionButton(Icons.screen_share, "Tv"),
+                      ],
+                    ),
+                    SizedBox(height: 8,),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        _buildActionButton(Icons.savings_outlined, "Savebox"),
+                        _buildActionButton(Icons.local_attraction, "Loan"),
+                        _buildActionButton(Icons.insert_invitation_rounded, "Invitation"),
+                        _buildActionButton(Icons.more, "More"),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
         ),
+
       ],
     );
   }
