@@ -26,19 +26,19 @@ class ProductCard extends StatelessWidget {
       onTap: press,
       child: Container(
         width: 170,
-        margin: const EdgeInsets.only(right: 8,left: 8),
+        margin: const EdgeInsets.only(right: 8,),
         decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(8),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.1),
-              spreadRadius: 1,
-              blurRadius: 3,
-              offset: const Offset(0, 1),
-            ),
-          ],
-        ),
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(defaultBorderRadious),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.1),
+            spreadRadius: 1,
+            blurRadius: 3,
+            offset: const Offset(0, 1),
+          ),
+        ],
+      ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

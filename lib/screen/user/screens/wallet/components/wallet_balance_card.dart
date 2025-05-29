@@ -62,9 +62,19 @@ class WalletBalanceCard extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
+
+                      
                       ],
                     ),
                   ),
+                    GestureDetector(
+                      child: Row(
+                        children: [
+                          Text("transction history",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
+                          Icon(Icons.arrow_right,color: Colors.white,)
+                        ],
+                      ),
+                    )
                 ],
               ),
               const SizedBox(height: defaultPadding),
@@ -108,8 +118,10 @@ class WalletBalanceCard extends StatelessWidget {
                         ),
                       ),
                      MaterialButton(onPressed: (){},
-                     
-
+                        minWidth: 50,
+                        height: 20,
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(9)),
+                        color: Colors.deepPurple,
                      child: Row(children: [
                       Icon(Icons.add,color: Colors.white,),
                       Text("Add Money",style: TextStyle(color: Colors.white),)
