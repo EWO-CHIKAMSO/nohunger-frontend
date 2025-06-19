@@ -1,11 +1,10 @@
+import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:nohunger/screen/logistic/ui/change_password.dart';
-import 'package:nohunger/screen/logistic/ui/privacy_policy.dart';
-import 'package:nohunger/screen/logistic/ui/rider_support.dart';
-import 'package:nohunger/screen/logistic/ui/term_and_conditions.dart';
-import 'package:nohunger/screen/vendor/ui/order_history_screen.dart';
-import 'package:nohunger/screen/vendor/widget/buttomnav.dart';
+import 'package:nohunger/screen/logistic/home_page.dart';
+import 'package:nohunger/screen/logistic/ui/rider_dashboard.dart';
+import 'package:nohunger/screen/logistic/ui/view_cart.dart';
+import 'package:nohunger/utilities/constants.dart';
 
 class HomeScreen extends StatefulWidget {
   final VoidCallback onGoBack;
@@ -17,314 +16,107 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   bool isDarkMode = false;
+  int _currentIndex = 0;
 
-  void _logout() {
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(
-        builder: (_) => BottomNav(onGoToSecondPage: widget.onGoBack),
-      ),
-    );
-  }
+  final List<Widget> _pages = [
+     HomePage(),
+    viewCart(),
+   RiderDashboardScreen()
+  ];
+
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: CustomDrawer(
-        isDarkMode: isDarkMode,
-        onThemeChanged: (value) {
-          setState(() {
-            isDarkMode = value;
-          });
+        
+      body: PageTransitionSwitcher(
+        duration: defaultDuration,
+        transitionBuilder: (child, animation, secondaryAnimation) {
+          return FadeThroughTransition(
+            animation: animation,
+            secondaryAnimation: secondaryAnimation,
+            child: child,
+          );
         },
+        child: _pages[_currentIndex],
       ),
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        toolbarHeight: 120,
-        elevation: 8,
-        title: Row(
-          children: [
-            Image.asset('assets/images/rider.PNG', height: 45, width: 45),
-            SizedBox(width: 8),
-            Text(
-              "Rider",
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 32,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ],
-        ),
-        centerTitle: true,
-        actions: [
-          Row(
+      bottomNavigationBar: BottomAppBar(
+        height: 66,
+        shape: const CircularNotchedRectangle(),
+        color: Theme.of(context).brightness == Brightness.light
+            ? Colors.white
+            : const Color(0xFF101015),
+        child: SizedBox(
+          height: 60,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              GestureDetector(
-                onTap: () {},
-                child: Icon(Icons.exit_to_app, color: Colors.black, size: 30),
-              ),
-              SizedBox(width: 10),
-              Padding(
-                padding: const EdgeInsets.only(right: 16),
-                child: Stack(
-                  children: [
-                    FaIcon(FontAwesomeIcons.bell),
-                    Positioned(
-                      bottom: 10,
-                      left: 12,
-                      child: Container(
-                        height: 11,
-                        width: 11,
-                        decoration: BoxDecoration(
-                          color: Colors.red,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+              _buildNavItem(0, Icons.grid_view, "Home"),
+              _buildNavItem(1, Icons.account_balance_wallet_outlined, "Wallet"),
+              _buildBookmarkButton(), 
+              _buildNavItem(2, Icons.shopping_basket_outlined, "Cart"),
+              _buildNavItem(3, Icons.person_outline, "Profile"),
             ],
           ),
-        ],
+        ),
       ),
-      body: Column(
+    
+    );
+  }
+
+  Widget _buildNavItem(int index, IconData iconPath, String label) {
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          _currentIndex = index;
+        });
+      },
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Container(
-            width: double.infinity,
-            height: 180,
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [
-                  Color.fromARGB(255, 129, 6, 129),
-                  Color.fromARGB(255, 231, 28, 28),
-                ],
-              ),
-            ),
-            padding: EdgeInsets.all(10),
-            child: Card(
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          "Today's Orders",
-                          style: TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        IconButton(
-                          onPressed: () {},
-                          icon: Icon(Icons.arrow_forward),
-                        ),
-                      ],
-                    ),
-                    Expanded(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          _orderCard("To Do", "0"),
-                          _orderCard("Complete", "0"),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
+          Icon(
+            iconPath,
+            color: _currentIndex == index ? Colors.black : Colors.grey,
+            size: 24,
           ),
-          Expanded(
-            child: Column(
-              children: [
-                Text("No Orders Found"),
-                SizedBox(height: 16),
-              ],
+          const SizedBox(height: 2),
+          Text(
+            label,
+            style: TextStyle(
+              fontSize: 11,
+              color: _currentIndex == index ? Colors.black : Colors.grey,
             ),
           ),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
+    );
+  }
+
+  Widget _buildBookmarkButton() {
+    return GestureDetector(
+      onTap: () {
+        
           Navigator.pop(context);
           print("Floating Action Button Pressed");
         },
-        backgroundColor: Colors.pinkAccent,
-        child: Icon(Icons.add,color: Colors.white,),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
-    );
-  }
-
-  Widget _orderCard(String title, String count) {
-    return Container(
-      width: 160,
-      height: 80,
-      padding: EdgeInsets.all(10),
-      decoration: BoxDecoration(
-        color: Color.fromARGB(255, 226, 225, 225),
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(title),
-                  Text(
-                    count,
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
-              ),
-              IconButton(
-                onPressed: () {},
-                icon: Icon(Icons.shopping_bag),
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class CustomDrawer extends StatelessWidget {
-  final bool isDarkMode;
-  final ValueChanged<bool> onThemeChanged;
-
-  const CustomDrawer({
-    super.key,
-    required this.isDarkMode,
-    required this.onThemeChanged,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Drawer(
-      child: Column(
-        children: [
-          UserAccountsDrawerHeader(
-            decoration: BoxDecoration(color: Colors.white),
-            accountName: Text(
-              "Demo Rider",
-              style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
-            ),
-            accountEmail: Text("01700000000", style: TextStyle(color: Colors.grey)),
-            currentAccountPicture: CircleAvatar(
-              backgroundImage: AssetImage("assets/avatar.png"),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: Row(
-              children: [
-                _infoCard("Completed Job", "0", Icons.check_circle),
-                SizedBox(width: 10),
-                _infoCard("Cash Collected", "€0.00", Icons.attach_money),
-              ],
-            ),
-          ),
-          SizedBox(height: 20),
-          _menuItem(context, Icons.history, "Order History", OrderHistoryScreen()),
-          _menuItem(context, Icons.language, "Language", null, trailing: _languageWidget()),
-          _menuItem(context, Icons.support_agent, "Rider Support", RiderSupportScreen()),
-          _menuItem(context, Icons.policy, "Terms and Conditions", TermsandConditionsScreen()),
-          _menuItem(context, Icons.lock, "Privacy Policy", PrivacyPolicyScreen()),
-          _menuItem(context, Icons.password, "Change Password", ChangePasswordScreen()),
-          _themeToggle(),
-          _logoutButton(),
-        ],
-      ),
-    );
-  }
-
-  Widget _infoCard(String title, String value, IconData icon) {
-    return Expanded(
-      child: Card(
-        color: Colors.black87,
-        child: Padding(
-          padding: EdgeInsets.all(12),
-          child: Column(
-            children: [
-              Text(title, style: TextStyle(color: Colors.white70, fontSize: 12)),
-              SizedBox(height: 5),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(icon, color: Colors.green, size: 16),
-                  SizedBox(width: 5),
-                  Text(value, style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
-                ],
-              ),
-            ],
+      
+      child: Container(
+        height: 30,
+        width: 40,
+        decoration: BoxDecoration(
+          color: Colors.black,
+          shape: BoxShape.rectangle,
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: Center(
+          child: Icon(
+            Icons.add,
+            color: Colors.white,
+            size: 24,
           ),
         ),
-      ),
-    );
-  }
-
-  Widget _menuItem(BuildContext context, IconData icon, String title, Widget? screen,
-      {Widget? trailing}) {
-    return ListTile(
-      leading: Icon(icon, color: Colors.pinkAccent),
-      title: Text(title),
-      trailing: trailing,
-      onTap: screen != null
-          ? () => Navigator.push(context, MaterialPageRoute(builder: (context) => screen))
-          : null,
-    );
-  }
-
-  Widget _languageWidget() {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-      decoration: BoxDecoration(
-        color: Colors.grey.shade300,
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(Icons.flag, color: Colors.red),
-          SizedBox(width: 5),
-          Text("ENG", style: TextStyle(fontWeight: FontWeight.bold)),
-        ],
-      ),
-    );
-  }
-
-  Widget _themeToggle() {
-    return ListTile(
-      leading: Icon(Icons.brightness_6, color: Colors.pinkAccent),
-      title: Text("Theme"),
-      trailing: Switch(value: isDarkMode, onChanged: onThemeChanged),
-    );
-  }
-
-  Widget _logoutButton() {
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: ElevatedButton.icon(
-        style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.redAccent,
-          foregroundColor: Colors.white,
-          minimumSize: Size(double.infinity, 40),
-        ),
-        onPressed: () {},
-        icon: Icon(Icons.logout),
-        label: Text("Logout"),
       ),
     );
   }

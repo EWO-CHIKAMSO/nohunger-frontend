@@ -1,4 +1,5 @@
 import 'package:nohunger/screen/user/models/product_model.dart';
+import 'package:nohunger/screen/user/screens/home/components/rewards_section.dart';
 import 'package:nohunger/utilities/constants.dart';
 import 'package:flutter/material.dart';
 
@@ -34,10 +35,11 @@ class WalletScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              SliverToBoxAdapter(child: SizedBox(height: 30,),),
-              
+           
+              SliverToBoxAdapter(child: SizedBox(height: 180,),),
+                SliverToBoxAdapter(child: RewardsSection(),),
               SliverPadding(
-                padding: const EdgeInsets.only(top: 140),
+                padding: const EdgeInsets.only(top:defaultPadding),
                 sliver: SliverToBoxAdapter(
                   child: Text(
                     "Wallet history",

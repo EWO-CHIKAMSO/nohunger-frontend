@@ -15,6 +15,12 @@ class BookmarkScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+    
+      appBar: AppBar(
+       automaticallyImplyLeading:false,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        elevation: 1,
+      ),
       body: CustomScrollView(
         slivers: [
           // While loading use 👇

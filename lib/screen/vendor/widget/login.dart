@@ -50,6 +50,7 @@ class _UserLoginState extends State<UserLogin> {
         nextScreen = EntryPoint();
         break;
       case 'Rider':
+      
         nextScreen = HomeScreen(onGoBack: () {  },);
         break;
       case 'Vendor':

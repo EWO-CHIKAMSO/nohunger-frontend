@@ -1,4 +1,5 @@
 import 'package:nohunger/components/naira_svg_icon.dart';
+import 'package:nohunger/screen/user/screens/home/components/rewards_section.dart';
 import 'package:nohunger/utilities/constants.dart';
 import 'package:flutter/material.dart';
 
@@ -205,6 +206,7 @@ class WalletBalanceCard extends StatelessWidget {
                   ],
                 ),
               ),
+      
             ],
           ),
         ),

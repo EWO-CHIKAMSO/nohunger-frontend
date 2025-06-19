@@ -27,6 +27,7 @@ dependencies:
   shared_preferences: ^2.5.3
   fl_chart: ^0.71.0
   syncfusion_flutter_charts: ^29.1.40
+  carousel_slider: ^5.1.1
 
 
 dev_dependencies:
