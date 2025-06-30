@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:nohunger/screen/logistic/ui/change_password.dart';
@@ -19,57 +20,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        toolbarHeight: 120,
-        elevation: 8,
-        title: Row(
-          children: [
-            Image.asset('assets/images/rider.PNG', height: 45, width: 45),
-            SizedBox(width: 8),
-            Text(
-              "Rider",
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 32,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ],
-        ),
-        centerTitle: true,
-        actions: [
-          Row(
-            children: [
-              GestureDetector(
-                onTap: () {},
-                child: Icon(Icons.exit_to_app, color: Colors.black, size: 30),
-              ),
-              SizedBox(width: 10),
-              Padding(
-                padding: const EdgeInsets.only(right: 16),
-                child: Stack(
-                  children: [
-                    FaIcon(FontAwesomeIcons.bell),
-                    Positioned(
-                      bottom: 10,
-                      left: 12,
-                      child: Container(
-                        height: 11,
-                        width: 11,
-                        decoration: BoxDecoration(
-                          color: Colors.red,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ],
-      ),
+      
       body: SingleChildScrollView( // Added this widget
         child: Column(
           children: [

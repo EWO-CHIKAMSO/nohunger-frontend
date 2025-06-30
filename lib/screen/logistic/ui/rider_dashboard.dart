@@ -84,7 +84,7 @@ class _RiderDashboardScreenState extends State<RiderDashboardScreen> {
         children: [
           // Main content
           SingleChildScrollView(
-            padding: const EdgeInsets.only(top: 80, bottom: 80),
+            padding: const EdgeInsets.only(top: 0, bottom: 80),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -432,58 +432,7 @@ class _RiderDashboardScreenState extends State<RiderDashboardScreen> {
             ),
           ),
           // Header
-          Positioned(
-            top: 0,
-            left: 0,
-            right: 0,
-            child: Container(
-              color: Colors.white,
-              padding: const EdgeInsets.fromLTRB(16, 32, 16, 8),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    children: [
-                      const CircleAvatar(
-                        radius: 20,
-                        backgroundImage: CachedNetworkImageProvider(
-                          'https://readdy.ai/api/search-image?query=professional%20portrait%20photo%20of%20a%20young%20male%20delivery%20rider%20with%20a%20friendly%20smile%2C%20wearing%20a%20delivery%20uniform%20cap%2C%20high%20quality%20professional%20headshot%2C%20isolated%20on%20light%20gray%20background%2C%20centered%20composition&width=100&height=100&seq=1&orientation=squarish',
-                        ),
-                      ),
-                      const SizedBox(width: 12),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            riderName,
-                            style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
-                          ),
-                          const Text(
-                            'Rider ID: #R78945',
-                            style: TextStyle(fontSize: 12, color: Colors.grey),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      IconButton(
-                        onPressed: () {},
-                        icon: const Icon(Icons.notifications_outlined),
-                        color: Colors.grey,
-                      ),
-                      IconButton(
-                        onPressed: () {},
-                        icon: const Icon(Icons.settings_outlined),
-                        color: Colors.grey,
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          ),
+          
           // Floating Action Button
           Positioned(
             bottom: 80,
